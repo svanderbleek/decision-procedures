@@ -1,0 +1,23 @@
+a, b, x, p, n: int;
+el: unsigned[32];
+pi: real;
+i, j: real;
+u: untyped;
+abs: function;
+prime, divides: predicate;
+
+absolute: axiom forall a: ((a >= 0 => abs(a) = a) and 
+                 (a < 0 => abs(a) = -a)) => 
+                 (exists el: el = abs(a))
+
+division: axiom (forall a, b: divides(a, b) <=>
+                 exists x: b = a * x)
+
+euclid: theorem (forall p, x: prime (p) <=>
+                 (not (p = 1) and
+                 (divides (x, p) => (x = 1) or (x=p))))
+                and (forall n: exists p: n < p and prime (p))
+
+simplex: theorem (i + 5*j <= 3) and
+                 (3*i < 3.7) and
+                 (i > -1) and (j > 0.12)

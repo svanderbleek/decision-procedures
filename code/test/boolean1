@@ -1,0 +1,6 @@
+// I am a comment!
+
+x, y, z: boolean;
+
+t1: theorem (x<->y)->(x->y);
+

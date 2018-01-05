@@ -1,0 +1,13 @@
+x, y, z, d': real;
+x0, x0_0, x0_1, x0__0, x0__1, x1, x1_0, x1_1, x1__0, x1__1, x2: real;
+
+diff0: theorem (x > y-1) or not ((z > y-2) and (x >= z));
+
+diff1: theorem (x > y + 1.2) and (x < y + 2) and (d'>2);
+
+diamond22: theorem (x0 > x0_0 - 1 | x0_0 > x0_1 - 1 | x0_1 > x1 - 1 |
+                    x0 > x0__0 + 10 | x0__0 > x0__1 + 10 | x0__1 > x1 + 10) &
+                   (x1 > x1_0 - 1 | x1_0 > x1_1 - 1 | x1_1 > x2 - 1 |
+                    x1 > x1__0 + 10 | x1__0 > x1__1 + 10 | x1__1 > x2 + 10) &
+                   x2 > x0 + 5;
+

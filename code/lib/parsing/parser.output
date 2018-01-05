@@ -1,0 +1,1912 @@
+Terminals which are not used
+
+   "declaration"
+   "formula definition"
+   "term definition"
+   "list"
+   "function"
+
+
+Grammar
+
+    0 $accept: all "end of file"
+
+    1 all: declarations
+    2    | declarations ';'
+
+    3 declarations: declaration
+    4             | declarations ';' declaration
+
+    5 identifier: "identifier"
+    6           | "predicate"
+
+    7 identifiers: identifier
+    8            | identifiers ',' identifier
+
+    9 declaration: identifiers ':' type
+   10            | identifiers ':' type "=" formula
+   11            | identifiers ':' type "=" term
+   12            | identifiers ':' "theorem" formula
+   13            | "theorem" formula
+   14            | formula
+   15            | identifiers ':' "axiom" formula
+   16            | "axiom" formula
+   17            | identifiers ':' "formula" formula
+   18            | "formula" formula
+   19            | identifiers ':' "regression" formula
+   20            | "regression" formula
+
+   21 type: "identifier"
+   22     | "boolean"
+   23     | "bv" '[' "integer number" ']'
+   24     | "int"
+   25     | "real"
+   26     | "signed" '[' "integer number" ']'
+   27     | "unsigned" '[' "integer number" ']'
+
+   28 formula: "forall" identifiers ':' formula
+   29        | "exists" identifiers ':' formula
+   30        | formula "=>" formula
+   31        | formula "<=>" formula
+   32        | formula "|" formula
+   33        | formula "&" formula
+   34        | "!" formula
+   35        | "true"
+   36        | "false"
+   37        | '(' formula ')'
+   38        | term "<" term
+   39        | term ">" term
+   40        | term "<=" term
+   41        | term ">=" term
+   42        | term "=" term
+   43        | term "!=" term
+   44        | "predicate" '(' terms ')'
+   45        | "predicate"
+
+   46 terms: term
+   47      | terms ',' term
+
+   48 term: term "+" term
+   49     | term "-" term
+   50     | term "*" term
+   51     | term "/" term
+   52     | term "%" term
+   53     | '(' term ')'
+   54     | "-" term
+   55     | "identifier" '(' terms ')'
+   56     | "IF" formula "THEN" term "ELSE" term "ENDIF"
+   57     | "integer number"
+   58     | "rational number"
+   59     | "identifier"
+
+
+Terminals, with rules where they appear
+
+"end of file" (0) 0
+'(' (40) 37 44 53 55
+')' (41) 37 44 53 55
+',' (44) 8 47
+':' (58) 9 10 11 12 15 17 19 28 29
+';' (59) 2 4
+'[' (91) 23 26 27
+']' (93) 23 26 27
+error (256)
+"identifier" (258) 5 21 55 59
+"integer number" (259) 23 26 27 57
+"rational number" (260) 58
+"boolean" (261) 22
+"unsigned" (262) 27
+"signed" (263) 26
+"real" (264) 25
+"int" (265) 24
+"bv" (266) 23
+"axiom" (267) 15 16
+"formula" (268) 17 18
+"regression" (269) 19 20
+"theorem" (270) 12 13
+"declaration" (271)
+"formula definition" (272)
+"term definition" (273)
+"&" (274) 33
+"|" (275) 32
+"!" (276) 34
+"<=>" (277) 31
+"=>" (278) 30
+"true" (279) 35
+"false" (280) 36
+"+" (281) 48
+"-" (282) 49 54
+"*" (283) 50
+"/" (284) 51
+"%" (285) 52
+"U-" (286)
+"<" (287) 38
+">" (288) 39
+"<=" (289) 40
+">=" (290) 41
+"=" (291) 10 11 42
+"!=" (292) 43
+"IF" (293) 56
+"THEN" (294) 56
+"ELSE" (295) 56
+"ENDIF" (296) 56
+"forall" (297) 28
+"exists" (298) 29
+"list" (299)
+"predicate" (300) 6 44 45
+"function" (301)
+
+
+Nonterminals, with rules where they appear
+
+$accept (54)
+    on left: 0
+all (55)
+    on left: 1 2, on right: 0
+declarations (56)
+    on left: 3 4, on right: 1 2 4
+identifier (57)
+    on left: 5 6, on right: 7 8
+identifiers (58)
+    on left: 7 8, on right: 8 9 10 11 12 15 17 19 28 29
+declaration (59)
+    on left: 9 10 11 12 13 14 15 16 17 18 19 20, on right: 3 4
+type (60)
+    on left: 21 22 23 24 25 26 27, on right: 9 10 11
+formula (61)
+    on left: 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45
+   , on right: 10 12 13 14 15 16 17 18 19 20 28 29 30 31 32 33 34 37
+    56
+terms (62)
+    on left: 46 47, on right: 44 47 55
+term (63)
+    on left: 48 49 50 51 52 53 54 55 56 57 58 59, on right: 11 38 39
+    40 41 42 43 46 47 48 49 50 51 52 53 54 56
+
+
+state 0
+
+    0 $accept: . all "end of file"
+
+    "identifier"       shift, and go to state 1
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "axiom"            shift, and go to state 4
+    "formula"          shift, and go to state 5
+    "regression"       shift, and go to state 6
+    "theorem"          shift, and go to state 7
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 15
+    '('                shift, and go to state 16
+
+    all           go to state 17
+    declarations  go to state 18
+    identifier    go to state 19
+    identifiers   go to state 20
+    declaration   go to state 21
+    formula       go to state 22
+    term          go to state 23
+
+
+state 1
+
+    5 identifier: "identifier" .
+   55 term: "identifier" . '(' terms ')'
+   59     | "identifier" .
+
+    '('  shift, and go to state 24
+
+    ','       reduce using rule 5 (identifier)
+    ':'       reduce using rule 5 (identifier)
+    $default  reduce using rule 59 (term)
+
+
+state 2
+
+   57 term: "integer number" .
+
+    $default  reduce using rule 57 (term)
+
+
+state 3
+
+   58 term: "rational number" .
+
+    $default  reduce using rule 58 (term)
+
+
+state 4
+
+   16 declaration: "axiom" . formula
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 26
+    '('                shift, and go to state 16
+
+    formula  go to state 27
+    term     go to state 23
+
+
+state 5
+
+   18 declaration: "formula" . formula
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 26
+    '('                shift, and go to state 16
+
+    formula  go to state 28
+    term     go to state 23
+
+
+state 6
+
+   20 declaration: "regression" . formula
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 26
+    '('                shift, and go to state 16
+
+    formula  go to state 29
+    term     go to state 23
+
+
+state 7
+
+   13 declaration: "theorem" . formula
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 26
+    '('                shift, and go to state 16
+
+    formula  go to state 30
+    term     go to state 23
+
+
+state 8
+
+   34 formula: "!" . formula
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 26
+    '('                shift, and go to state 16
+
+    formula  go to state 31
+    term     go to state 23
+
+
+state 9
+
+   35 formula: "true" .
+
+    $default  reduce using rule 35 (formula)
+
+
+state 10
+
+   36 formula: "false" .
+
+    $default  reduce using rule 36 (formula)
+
+
+state 11
+
+   54 term: "-" . term
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    '('                shift, and go to state 32
+
+    term  go to state 33
+
+
+state 12
+
+   56 term: "IF" . formula "THEN" term "ELSE" term "ENDIF"
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 26
+    '('                shift, and go to state 16
+
+    formula  go to state 34
+    term     go to state 23
+
+
+state 13
+
+   28 formula: "forall" . identifiers ':' formula
+
+    "identifier"  shift, and go to state 35
+    "predicate"   shift, and go to state 36
+
+    identifier   go to state 19
+    identifiers  go to state 37
+
+
+state 14
+
+   29 formula: "exists" . identifiers ':' formula
+
+    "identifier"  shift, and go to state 35
+    "predicate"   shift, and go to state 36
+
+    identifier   go to state 19
+    identifiers  go to state 38
+
+
+state 15
+
+    6 identifier: "predicate" .
+   44 formula: "predicate" . '(' terms ')'
+   45        | "predicate" .
+
+    '('  shift, and go to state 39
+
+    ','       reduce using rule 6 (identifier)
+    ':'       reduce using rule 6 (identifier)
+    $default  reduce using rule 45 (formula)
+
+
+state 16
+
+   37 formula: '(' . formula ')'
+   53 term: '(' . term ')'
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 26
+    '('                shift, and go to state 16
+
+    formula  go to state 40
+    term     go to state 41
+
+
+state 17
+
+    0 $accept: all . "end of file"
+
+    "end of file"  shift, and go to state 42
+
+
+state 18
+
+    1 all: declarations .
+    2    | declarations . ';'
+    4 declarations: declarations . ';' declaration
+
+    ';'  shift, and go to state 43
+
+    $default  reduce using rule 1 (all)
+
+
+state 19
+
+    7 identifiers: identifier .
+
+    $default  reduce using rule 7 (identifiers)
+
+
+state 20
+
+    8 identifiers: identifiers . ',' identifier
+    9 declaration: identifiers . ':' type
+   10            | identifiers . ':' type "=" formula
+   11            | identifiers . ':' type "=" term
+   12            | identifiers . ':' "theorem" formula
+   15            | identifiers . ':' "axiom" formula
+   17            | identifiers . ':' "formula" formula
+   19            | identifiers . ':' "regression" formula
+
+    ','  shift, and go to state 44
+    ':'  shift, and go to state 45
+
+
+state 21
+
+    3 declarations: declaration .
+
+    $default  reduce using rule 3 (declarations)
+
+
+state 22
+
+   14 declaration: formula .
+   30 formula: formula . "=>" formula
+   31        | formula . "<=>" formula
+   32        | formula . "|" formula
+   33        | formula . "&" formula
+
+    "&"    shift, and go to state 46
+    "|"    shift, and go to state 47
+    "<=>"  shift, and go to state 48
+    "=>"   shift, and go to state 49
+
+    $default  reduce using rule 14 (declaration)
+
+
+state 23
+
+   38 formula: term . "<" term
+   39        | term . ">" term
+   40        | term . "<=" term
+   41        | term . ">=" term
+   42        | term . "=" term
+   43        | term . "!=" term
+   48 term: term . "+" term
+   49     | term . "-" term
+   50     | term . "*" term
+   51     | term . "/" term
+   52     | term . "%" term
+
+    "+"   shift, and go to state 50
+    "-"   shift, and go to state 51
+    "*"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "%"   shift, and go to state 54
+    "<"   shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    ">="  shift, and go to state 58
+    "="   shift, and go to state 59
+    "!="  shift, and go to state 60
+
+
+state 24
+
+   55 term: "identifier" '(' . terms ')'
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    '('                shift, and go to state 32
+
+    terms  go to state 61
+    term   go to state 62
+
+
+state 25
+
+   55 term: "identifier" . '(' terms ')'
+   59     | "identifier" .
+
+    '('  shift, and go to state 24
+
+    $default  reduce using rule 59 (term)
+
+
+state 26
+
+   44 formula: "predicate" . '(' terms ')'
+   45        | "predicate" .
+
+    '('  shift, and go to state 39
+
+    $default  reduce using rule 45 (formula)
+
+
+state 27
+
+   16 declaration: "axiom" formula .
+   30 formula: formula . "=>" formula
+   31        | formula . "<=>" formula
+   32        | formula . "|" formula
+   33        | formula . "&" formula
+
+    "&"    shift, and go to state 46
+    "|"    shift, and go to state 47
+    "<=>"  shift, and go to state 48
+    "=>"   shift, and go to state 49
+
+    $default  reduce using rule 16 (declaration)
+
+
+state 28
+
+   18 declaration: "formula" formula .
+   30 formula: formula . "=>" formula
+   31        | formula . "<=>" formula
+   32        | formula . "|" formula
+   33        | formula . "&" formula
+
+    "&"    shift, and go to state 46
+    "|"    shift, and go to state 47
+    "<=>"  shift, and go to state 48
+    "=>"   shift, and go to state 49
+
+    $default  reduce using rule 18 (declaration)
+
+
+state 29
+
+   20 declaration: "regression" formula .
+   30 formula: formula . "=>" formula
+   31        | formula . "<=>" formula
+   32        | formula . "|" formula
+   33        | formula . "&" formula
+
+    "&"    shift, and go to state 46
+    "|"    shift, and go to state 47
+    "<=>"  shift, and go to state 48
+    "=>"   shift, and go to state 49
+
+    $default  reduce using rule 20 (declaration)
+
+
+state 30
+
+   13 declaration: "theorem" formula .
+   30 formula: formula . "=>" formula
+   31        | formula . "<=>" formula
+   32        | formula . "|" formula
+   33        | formula . "&" formula
+
+    "&"    shift, and go to state 46
+    "|"    shift, and go to state 47
+    "<=>"  shift, and go to state 48
+    "=>"   shift, and go to state 49
+
+    $default  reduce using rule 13 (declaration)
+
+
+state 31
+
+   30 formula: formula . "=>" formula
+   31        | formula . "<=>" formula
+   32        | formula . "|" formula
+   33        | formula . "&" formula
+   34        | "!" formula .
+
+    $default  reduce using rule 34 (formula)
+
+
+state 32
+
+   53 term: '(' . term ')'
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    '('                shift, and go to state 32
+
+    term  go to state 63
+
+
+state 33
+
+   48 term: term . "+" term
+   49     | term . "-" term
+   50     | term . "*" term
+   51     | term . "/" term
+   52     | term . "%" term
+   54     | "-" term .
+
+    $default  reduce using rule 54 (term)
+
+
+state 34
+
+   30 formula: formula . "=>" formula
+   31        | formula . "<=>" formula
+   32        | formula . "|" formula
+   33        | formula . "&" formula
+   56 term: "IF" formula . "THEN" term "ELSE" term "ENDIF"
+
+    "&"     shift, and go to state 46
+    "|"     shift, and go to state 47
+    "<=>"   shift, and go to state 48
+    "=>"    shift, and go to state 49
+    "THEN"  shift, and go to state 64
+
+
+state 35
+
+    5 identifier: "identifier" .
+
+    $default  reduce using rule 5 (identifier)
+
+
+state 36
+
+    6 identifier: "predicate" .
+
+    $default  reduce using rule 6 (identifier)
+
+
+state 37
+
+    8 identifiers: identifiers . ',' identifier
+   28 formula: "forall" identifiers . ':' formula
+
+    ','  shift, and go to state 44
+    ':'  shift, and go to state 65
+
+
+state 38
+
+    8 identifiers: identifiers . ',' identifier
+   29 formula: "exists" identifiers . ':' formula
+
+    ','  shift, and go to state 44
+    ':'  shift, and go to state 66
+
+
+state 39
+
+   44 formula: "predicate" '(' . terms ')'
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    '('                shift, and go to state 32
+
+    terms  go to state 67
+    term   go to state 62
+
+
+state 40
+
+   30 formula: formula . "=>" formula
+   31        | formula . "<=>" formula
+   32        | formula . "|" formula
+   33        | formula . "&" formula
+   37        | '(' formula . ')'
+
+    "&"    shift, and go to state 46
+    "|"    shift, and go to state 47
+    "<=>"  shift, and go to state 48
+    "=>"   shift, and go to state 49
+    ')'    shift, and go to state 68
+
+
+state 41
+
+   38 formula: term . "<" term
+   39        | term . ">" term
+   40        | term . "<=" term
+   41        | term . ">=" term
+   42        | term . "=" term
+   43        | term . "!=" term
+   48 term: term . "+" term
+   49     | term . "-" term
+   50     | term . "*" term
+   51     | term . "/" term
+   52     | term . "%" term
+   53     | '(' term . ')'
+
+    "+"   shift, and go to state 50
+    "-"   shift, and go to state 51
+    "*"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "%"   shift, and go to state 54
+    "<"   shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    ">="  shift, and go to state 58
+    "="   shift, and go to state 59
+    "!="  shift, and go to state 60
+    ')'   shift, and go to state 69
+
+
+state 42
+
+    0 $accept: all "end of file" .
+
+    $default  accept
+
+
+state 43
+
+    2 all: declarations ';' .
+    4 declarations: declarations ';' . declaration
+
+    "identifier"       shift, and go to state 1
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "axiom"            shift, and go to state 4
+    "formula"          shift, and go to state 5
+    "regression"       shift, and go to state 6
+    "theorem"          shift, and go to state 7
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 15
+    '('                shift, and go to state 16
+
+    $default  reduce using rule 2 (all)
+
+    identifier   go to state 19
+    identifiers  go to state 20
+    declaration  go to state 70
+    formula      go to state 22
+    term         go to state 23
+
+
+state 44
+
+    8 identifiers: identifiers ',' . identifier
+
+    "identifier"  shift, and go to state 35
+    "predicate"   shift, and go to state 36
+
+    identifier  go to state 71
+
+
+state 45
+
+    9 declaration: identifiers ':' . type
+   10            | identifiers ':' . type "=" formula
+   11            | identifiers ':' . type "=" term
+   12            | identifiers ':' . "theorem" formula
+   15            | identifiers ':' . "axiom" formula
+   17            | identifiers ':' . "formula" formula
+   19            | identifiers ':' . "regression" formula
+
+    "identifier"  shift, and go to state 72
+    "boolean"     shift, and go to state 73
+    "unsigned"    shift, and go to state 74
+    "signed"      shift, and go to state 75
+    "real"        shift, and go to state 76
+    "int"         shift, and go to state 77
+    "bv"          shift, and go to state 78
+    "axiom"       shift, and go to state 79
+    "formula"     shift, and go to state 80
+    "regression"  shift, and go to state 81
+    "theorem"     shift, and go to state 82
+
+    type  go to state 83
+
+
+state 46
+
+   33 formula: formula "&" . formula
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 26
+    '('                shift, and go to state 16
+
+    formula  go to state 84
+    term     go to state 23
+
+
+state 47
+
+   32 formula: formula "|" . formula
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 26
+    '('                shift, and go to state 16
+
+    formula  go to state 85
+    term     go to state 23
+
+
+state 48
+
+   31 formula: formula "<=>" . formula
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 26
+    '('                shift, and go to state 16
+
+    formula  go to state 86
+    term     go to state 23
+
+
+state 49
+
+   30 formula: formula "=>" . formula
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 26
+    '('                shift, and go to state 16
+
+    formula  go to state 87
+    term     go to state 23
+
+
+state 50
+
+   48 term: term "+" . term
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    '('                shift, and go to state 32
+
+    term  go to state 88
+
+
+state 51
+
+   49 term: term "-" . term
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    '('                shift, and go to state 32
+
+    term  go to state 89
+
+
+state 52
+
+   50 term: term "*" . term
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    '('                shift, and go to state 32
+
+    term  go to state 90
+
+
+state 53
+
+   51 term: term "/" . term
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    '('                shift, and go to state 32
+
+    term  go to state 91
+
+
+state 54
+
+   52 term: term "%" . term
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    '('                shift, and go to state 32
+
+    term  go to state 92
+
+
+state 55
+
+   38 formula: term "<" . term
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    '('                shift, and go to state 32
+
+    term  go to state 93
+
+
+state 56
+
+   39 formula: term ">" . term
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    '('                shift, and go to state 32
+
+    term  go to state 94
+
+
+state 57
+
+   40 formula: term "<=" . term
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    '('                shift, and go to state 32
+
+    term  go to state 95
+
+
+state 58
+
+   41 formula: term ">=" . term
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    '('                shift, and go to state 32
+
+    term  go to state 96
+
+
+state 59
+
+   42 formula: term "=" . term
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    '('                shift, and go to state 32
+
+    term  go to state 97
+
+
+state 60
+
+   43 formula: term "!=" . term
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    '('                shift, and go to state 32
+
+    term  go to state 98
+
+
+state 61
+
+   47 terms: terms . ',' term
+   55 term: "identifier" '(' terms . ')'
+
+    ','  shift, and go to state 99
+    ')'  shift, and go to state 100
+
+
+state 62
+
+   46 terms: term .
+   48 term: term . "+" term
+   49     | term . "-" term
+   50     | term . "*" term
+   51     | term . "/" term
+   52     | term . "%" term
+
+    "+"  shift, and go to state 50
+    "-"  shift, and go to state 51
+    "*"  shift, and go to state 52
+    "/"  shift, and go to state 53
+    "%"  shift, and go to state 54
+
+    $default  reduce using rule 46 (terms)
+
+
+state 63
+
+   48 term: term . "+" term
+   49     | term . "-" term
+   50     | term . "*" term
+   51     | term . "/" term
+   52     | term . "%" term
+   53     | '(' term . ')'
+
+    "+"  shift, and go to state 50
+    "-"  shift, and go to state 51
+    "*"  shift, and go to state 52
+    "/"  shift, and go to state 53
+    "%"  shift, and go to state 54
+    ')'  shift, and go to state 69
+
+
+state 64
+
+   56 term: "IF" formula "THEN" . term "ELSE" term "ENDIF"
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    '('                shift, and go to state 32
+
+    term  go to state 101
+
+
+state 65
+
+   28 formula: "forall" identifiers ':' . formula
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 26
+    '('                shift, and go to state 16
+
+    formula  go to state 102
+    term     go to state 23
+
+
+state 66
+
+   29 formula: "exists" identifiers ':' . formula
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 26
+    '('                shift, and go to state 16
+
+    formula  go to state 103
+    term     go to state 23
+
+
+state 67
+
+   44 formula: "predicate" '(' terms . ')'
+   47 terms: terms . ',' term
+
+    ','  shift, and go to state 99
+    ')'  shift, and go to state 104
+
+
+state 68
+
+   37 formula: '(' formula ')' .
+
+    $default  reduce using rule 37 (formula)
+
+
+state 69
+
+   53 term: '(' term ')' .
+
+    $default  reduce using rule 53 (term)
+
+
+state 70
+
+    4 declarations: declarations ';' declaration .
+
+    $default  reduce using rule 4 (declarations)
+
+
+state 71
+
+    8 identifiers: identifiers ',' identifier .
+
+    $default  reduce using rule 8 (identifiers)
+
+
+state 72
+
+   21 type: "identifier" .
+
+    $default  reduce using rule 21 (type)
+
+
+state 73
+
+   22 type: "boolean" .
+
+    $default  reduce using rule 22 (type)
+
+
+state 74
+
+   27 type: "unsigned" . '[' "integer number" ']'
+
+    '['  shift, and go to state 105
+
+
+state 75
+
+   26 type: "signed" . '[' "integer number" ']'
+
+    '['  shift, and go to state 106
+
+
+state 76
+
+   25 type: "real" .
+
+    $default  reduce using rule 25 (type)
+
+
+state 77
+
+   24 type: "int" .
+
+    $default  reduce using rule 24 (type)
+
+
+state 78
+
+   23 type: "bv" . '[' "integer number" ']'
+
+    '['  shift, and go to state 107
+
+
+state 79
+
+   15 declaration: identifiers ':' "axiom" . formula
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 26
+    '('                shift, and go to state 16
+
+    formula  go to state 108
+    term     go to state 23
+
+
+state 80
+
+   17 declaration: identifiers ':' "formula" . formula
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 26
+    '('                shift, and go to state 16
+
+    formula  go to state 109
+    term     go to state 23
+
+
+state 81
+
+   19 declaration: identifiers ':' "regression" . formula
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 26
+    '('                shift, and go to state 16
+
+    formula  go to state 110
+    term     go to state 23
+
+
+state 82
+
+   12 declaration: identifiers ':' "theorem" . formula
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 26
+    '('                shift, and go to state 16
+
+    formula  go to state 111
+    term     go to state 23
+
+
+state 83
+
+    9 declaration: identifiers ':' type .
+   10            | identifiers ':' type . "=" formula
+   11            | identifiers ':' type . "=" term
+
+    "="  shift, and go to state 112
+
+    $default  reduce using rule 9 (declaration)
+
+
+state 84
+
+   30 formula: formula . "=>" formula
+   31        | formula . "<=>" formula
+   32        | formula . "|" formula
+   33        | formula . "&" formula
+   33        | formula "&" formula .
+
+    $default  reduce using rule 33 (formula)
+
+
+state 85
+
+   30 formula: formula . "=>" formula
+   31        | formula . "<=>" formula
+   32        | formula . "|" formula
+   32        | formula "|" formula .
+   33        | formula . "&" formula
+
+    "&"  shift, and go to state 46
+
+    $default  reduce using rule 32 (formula)
+
+
+state 86
+
+   30 formula: formula . "=>" formula
+   31        | formula . "<=>" formula
+   31        | formula "<=>" formula .
+   32        | formula . "|" formula
+   33        | formula . "&" formula
+
+    "&"  shift, and go to state 46
+    "|"  shift, and go to state 47
+
+    $default  reduce using rule 31 (formula)
+
+
+state 87
+
+   30 formula: formula . "=>" formula
+   30        | formula "=>" formula .
+   31        | formula . "<=>" formula
+   32        | formula . "|" formula
+   33        | formula . "&" formula
+
+    "&"  shift, and go to state 46
+    "|"  shift, and go to state 47
+
+    $default  reduce using rule 30 (formula)
+
+
+state 88
+
+   48 term: term . "+" term
+   48     | term "+" term .
+   49     | term . "-" term
+   50     | term . "*" term
+   51     | term . "/" term
+   52     | term . "%" term
+
+    "*"  shift, and go to state 52
+    "/"  shift, and go to state 53
+    "%"  shift, and go to state 54
+
+    $default  reduce using rule 48 (term)
+
+
+state 89
+
+   48 term: term . "+" term
+   49     | term . "-" term
+   49     | term "-" term .
+   50     | term . "*" term
+   51     | term . "/" term
+   52     | term . "%" term
+
+    "*"  shift, and go to state 52
+    "/"  shift, and go to state 53
+    "%"  shift, and go to state 54
+
+    $default  reduce using rule 49 (term)
+
+
+state 90
+
+   48 term: term . "+" term
+   49     | term . "-" term
+   50     | term . "*" term
+   50     | term "*" term .
+   51     | term . "/" term
+   52     | term . "%" term
+
+    $default  reduce using rule 50 (term)
+
+
+state 91
+
+   48 term: term . "+" term
+   49     | term . "-" term
+   50     | term . "*" term
+   51     | term . "/" term
+   51     | term "/" term .
+   52     | term . "%" term
+
+    $default  reduce using rule 51 (term)
+
+
+state 92
+
+   48 term: term . "+" term
+   49     | term . "-" term
+   50     | term . "*" term
+   51     | term . "/" term
+   52     | term . "%" term
+   52     | term "%" term .
+
+    $default  reduce using rule 52 (term)
+
+
+state 93
+
+   38 formula: term "<" term .
+   48 term: term . "+" term
+   49     | term . "-" term
+   50     | term . "*" term
+   51     | term . "/" term
+   52     | term . "%" term
+
+    "+"  shift, and go to state 50
+    "-"  shift, and go to state 51
+    "*"  shift, and go to state 52
+    "/"  shift, and go to state 53
+    "%"  shift, and go to state 54
+
+    $default  reduce using rule 38 (formula)
+
+
+state 94
+
+   39 formula: term ">" term .
+   48 term: term . "+" term
+   49     | term . "-" term
+   50     | term . "*" term
+   51     | term . "/" term
+   52     | term . "%" term
+
+    "+"  shift, and go to state 50
+    "-"  shift, and go to state 51
+    "*"  shift, and go to state 52
+    "/"  shift, and go to state 53
+    "%"  shift, and go to state 54
+
+    $default  reduce using rule 39 (formula)
+
+
+state 95
+
+   40 formula: term "<=" term .
+   48 term: term . "+" term
+   49     | term . "-" term
+   50     | term . "*" term
+   51     | term . "/" term
+   52     | term . "%" term
+
+    "+"  shift, and go to state 50
+    "-"  shift, and go to state 51
+    "*"  shift, and go to state 52
+    "/"  shift, and go to state 53
+    "%"  shift, and go to state 54
+
+    $default  reduce using rule 40 (formula)
+
+
+state 96
+
+   41 formula: term ">=" term .
+   48 term: term . "+" term
+   49     | term . "-" term
+   50     | term . "*" term
+   51     | term . "/" term
+   52     | term . "%" term
+
+    "+"  shift, and go to state 50
+    "-"  shift, and go to state 51
+    "*"  shift, and go to state 52
+    "/"  shift, and go to state 53
+    "%"  shift, and go to state 54
+
+    $default  reduce using rule 41 (formula)
+
+
+state 97
+
+   42 formula: term "=" term .
+   48 term: term . "+" term
+   49     | term . "-" term
+   50     | term . "*" term
+   51     | term . "/" term
+   52     | term . "%" term
+
+    "+"  shift, and go to state 50
+    "-"  shift, and go to state 51
+    "*"  shift, and go to state 52
+    "/"  shift, and go to state 53
+    "%"  shift, and go to state 54
+
+    $default  reduce using rule 42 (formula)
+
+
+state 98
+
+   43 formula: term "!=" term .
+   48 term: term . "+" term
+   49     | term . "-" term
+   50     | term . "*" term
+   51     | term . "/" term
+   52     | term . "%" term
+
+    "+"  shift, and go to state 50
+    "-"  shift, and go to state 51
+    "*"  shift, and go to state 52
+    "/"  shift, and go to state 53
+    "%"  shift, and go to state 54
+
+    $default  reduce using rule 43 (formula)
+
+
+state 99
+
+   47 terms: terms ',' . term
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    '('                shift, and go to state 32
+
+    term  go to state 113
+
+
+state 100
+
+   55 term: "identifier" '(' terms ')' .
+
+    $default  reduce using rule 55 (term)
+
+
+state 101
+
+   48 term: term . "+" term
+   49     | term . "-" term
+   50     | term . "*" term
+   51     | term . "/" term
+   52     | term . "%" term
+   56     | "IF" formula "THEN" term . "ELSE" term "ENDIF"
+
+    "+"     shift, and go to state 50
+    "-"     shift, and go to state 51
+    "*"     shift, and go to state 52
+    "/"     shift, and go to state 53
+    "%"     shift, and go to state 54
+    "ELSE"  shift, and go to state 114
+
+
+state 102
+
+   28 formula: "forall" identifiers ':' formula .
+   30        | formula . "=>" formula
+   31        | formula . "<=>" formula
+   32        | formula . "|" formula
+   33        | formula . "&" formula
+
+    "&"    shift, and go to state 46
+    "|"    shift, and go to state 47
+    "<=>"  shift, and go to state 48
+    "=>"   shift, and go to state 49
+
+    $default  reduce using rule 28 (formula)
+
+
+state 103
+
+   29 formula: "exists" identifiers ':' formula .
+   30        | formula . "=>" formula
+   31        | formula . "<=>" formula
+   32        | formula . "|" formula
+   33        | formula . "&" formula
+
+    "&"    shift, and go to state 46
+    "|"    shift, and go to state 47
+    "<=>"  shift, and go to state 48
+    "=>"   shift, and go to state 49
+
+    $default  reduce using rule 29 (formula)
+
+
+state 104
+
+   44 formula: "predicate" '(' terms ')' .
+
+    $default  reduce using rule 44 (formula)
+
+
+state 105
+
+   27 type: "unsigned" '[' . "integer number" ']'
+
+    "integer number"  shift, and go to state 115
+
+
+state 106
+
+   26 type: "signed" '[' . "integer number" ']'
+
+    "integer number"  shift, and go to state 116
+
+
+state 107
+
+   23 type: "bv" '[' . "integer number" ']'
+
+    "integer number"  shift, and go to state 117
+
+
+state 108
+
+   15 declaration: identifiers ':' "axiom" formula .
+   30 formula: formula . "=>" formula
+   31        | formula . "<=>" formula
+   32        | formula . "|" formula
+   33        | formula . "&" formula
+
+    "&"    shift, and go to state 46
+    "|"    shift, and go to state 47
+    "<=>"  shift, and go to state 48
+    "=>"   shift, and go to state 49
+
+    $default  reduce using rule 15 (declaration)
+
+
+state 109
+
+   17 declaration: identifiers ':' "formula" formula .
+   30 formula: formula . "=>" formula
+   31        | formula . "<=>" formula
+   32        | formula . "|" formula
+   33        | formula . "&" formula
+
+    "&"    shift, and go to state 46
+    "|"    shift, and go to state 47
+    "<=>"  shift, and go to state 48
+    "=>"   shift, and go to state 49
+
+    $default  reduce using rule 17 (declaration)
+
+
+state 110
+
+   19 declaration: identifiers ':' "regression" formula .
+   30 formula: formula . "=>" formula
+   31        | formula . "<=>" formula
+   32        | formula . "|" formula
+   33        | formula . "&" formula
+
+    "&"    shift, and go to state 46
+    "|"    shift, and go to state 47
+    "<=>"  shift, and go to state 48
+    "=>"   shift, and go to state 49
+
+    $default  reduce using rule 19 (declaration)
+
+
+state 111
+
+   12 declaration: identifiers ':' "theorem" formula .
+   30 formula: formula . "=>" formula
+   31        | formula . "<=>" formula
+   32        | formula . "|" formula
+   33        | formula . "&" formula
+
+    "&"    shift, and go to state 46
+    "|"    shift, and go to state 47
+    "<=>"  shift, and go to state 48
+    "=>"   shift, and go to state 49
+
+    $default  reduce using rule 12 (declaration)
+
+
+state 112
+
+   10 declaration: identifiers ':' type "=" . formula
+   11            | identifiers ':' type "=" . term
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "!"                shift, and go to state 8
+    "true"             shift, and go to state 9
+    "false"            shift, and go to state 10
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    "forall"           shift, and go to state 13
+    "exists"           shift, and go to state 14
+    "predicate"        shift, and go to state 26
+    '('                shift, and go to state 16
+
+    formula  go to state 118
+    term     go to state 119
+
+
+state 113
+
+   47 terms: terms ',' term .
+   48 term: term . "+" term
+   49     | term . "-" term
+   50     | term . "*" term
+   51     | term . "/" term
+   52     | term . "%" term
+
+    "+"  shift, and go to state 50
+    "-"  shift, and go to state 51
+    "*"  shift, and go to state 52
+    "/"  shift, and go to state 53
+    "%"  shift, and go to state 54
+
+    $default  reduce using rule 47 (terms)
+
+
+state 114
+
+   56 term: "IF" formula "THEN" term "ELSE" . term "ENDIF"
+
+    "identifier"       shift, and go to state 25
+    "integer number"   shift, and go to state 2
+    "rational number"  shift, and go to state 3
+    "-"                shift, and go to state 11
+    "IF"               shift, and go to state 12
+    '('                shift, and go to state 32
+
+    term  go to state 120
+
+
+state 115
+
+   27 type: "unsigned" '[' "integer number" . ']'
+
+    ']'  shift, and go to state 121
+
+
+state 116
+
+   26 type: "signed" '[' "integer number" . ']'
+
+    ']'  shift, and go to state 122
+
+
+state 117
+
+   23 type: "bv" '[' "integer number" . ']'
+
+    ']'  shift, and go to state 123
+
+
+state 118
+
+   10 declaration: identifiers ':' type "=" formula .
+   30 formula: formula . "=>" formula
+   31        | formula . "<=>" formula
+   32        | formula . "|" formula
+   33        | formula . "&" formula
+
+    "&"    shift, and go to state 46
+    "|"    shift, and go to state 47
+    "<=>"  shift, and go to state 48
+    "=>"   shift, and go to state 49
+
+    $default  reduce using rule 10 (declaration)
+
+
+state 119
+
+   11 declaration: identifiers ':' type "=" term .
+   38 formula: term . "<" term
+   39        | term . ">" term
+   40        | term . "<=" term
+   41        | term . ">=" term
+   42        | term . "=" term
+   43        | term . "!=" term
+   48 term: term . "+" term
+   49     | term . "-" term
+   50     | term . "*" term
+   51     | term . "/" term
+   52     | term . "%" term
+
+    "+"   shift, and go to state 50
+    "-"   shift, and go to state 51
+    "*"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "%"   shift, and go to state 54
+    "<"   shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    ">="  shift, and go to state 58
+    "="   shift, and go to state 59
+    "!="  shift, and go to state 60
+
+    $default  reduce using rule 11 (declaration)
+
+
+state 120
+
+   48 term: term . "+" term
+   49     | term . "-" term
+   50     | term . "*" term
+   51     | term . "/" term
+   52     | term . "%" term
+   56     | "IF" formula "THEN" term "ELSE" term . "ENDIF"
+
+    "+"      shift, and go to state 50
+    "-"      shift, and go to state 51
+    "*"      shift, and go to state 52
+    "/"      shift, and go to state 53
+    "%"      shift, and go to state 54
+    "ENDIF"  shift, and go to state 124
+
+
+state 121
+
+   27 type: "unsigned" '[' "integer number" ']' .
+
+    $default  reduce using rule 27 (type)
+
+
+state 122
+
+   26 type: "signed" '[' "integer number" ']' .
+
+    $default  reduce using rule 26 (type)
+
+
+state 123
+
+   23 type: "bv" '[' "integer number" ']' .
+
+    $default  reduce using rule 23 (type)
+
+
+state 124
+
+   56 term: "IF" formula "THEN" term "ELSE" term "ENDIF" .
+
+    $default  reduce using rule 56 (term)
